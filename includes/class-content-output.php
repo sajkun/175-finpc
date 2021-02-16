@@ -417,6 +417,10 @@ class theme_content_output{
 
 
   public static function print_downloads_page(){
+    if(!function_exists('get_field')){
+      echo 'ACF plugin required!';
+      return;
+    };
     global $theme_init;
     $args = array();
 
@@ -454,6 +458,11 @@ class theme_content_output{
 
 
   public static function print_faq_page(){
+    if(!function_exists('get_field')){
+      echo 'ACF plugin required!';
+      return;
+    };
+
     $faq = get_posts(array(
       'post_type'      => 'theme_faq',
       'posts_per_page' => -1,
@@ -468,6 +477,10 @@ class theme_content_output{
 
 
   public static function print_gallery_page(){
+    if(!function_exists('get_field')){
+      echo 'ACF plugin required!';
+      return;
+    };
     global $theme_init;
     $obj = get_queried_object();
 
@@ -525,6 +538,212 @@ class theme_content_output{
     );
 
     print_theme_template_part('gallery', 'pages', $args);
+  }
+
+
+  public static function print_watch_page(){
+    if(!function_exists('get_field')){
+      echo 'ACF plugin required!';
+      return;
+    };
+
+    global $theme_init;
+
+   $args = array(
+      'post_type' => 'theme_media',
+      'posts_per_page' => -1
+    );
+
+    if(get_field('media_items', $obj_id)){
+      $args['post__in'] = get_field('media_items', $obj_id);
+    }
+
+    $video = get_posts($args)?: array();
+
+    $video = array_map(function($el){
+
+      $date = new DateTime($el->post_date);
+      $id = get_post_thumbnail_id( $el->ID );
+
+      $terms = wp_get_post_terms($el->ID, 'video_category', array('fields'=>'names'));
+
+      $terms = array_map( function($el){
+        return strtolower($el);
+      },$terms );
+
+      return array(
+       'title' => $el->post_title,
+       'date' => str_replace(' ', 'T', $el->post_date),
+       'date_formatted' => $date->format('d F'),
+       'image' => wp_get_attachment_image_url($id , 'video_thumb'),
+       'url'   => get_permalink($el),
+       'category' => $terms,
+       'text' => strip_tags(strip_shortcodes($el->post_content)),
+      );
+    }, $video);
+
+    $category = array_map(
+      function($el){
+        return $el['category'];
+      }, array_filter($video, function($el){
+      return count($el['category']) > 0;
+    }));
+
+    $result = [];
+
+    array_walk_recursive($category, function ($item, $key) use (&$result) {
+        $result[] = $item;
+    });
+
+    $category = array_unique($result);
+
+    wp_localize_script($theme_init->main_script_slug,'video_items', $video);
+    wp_localize_script($theme_init->main_script_slug,'video_categories', $category);
+
+    $id = get_queried_object_id();
+
+    $args = array(
+      'categories' => $category,
+      'background_image' => get_field('background_image',$id),
+      'title' => get_field('title',$id),
+      'text' => get_field('blockquote',$id),
+      'author' => get_field('author',$id),
+      'author_position' => get_field('author_position',$id),
+      'video_url' => get_field('video_url',$id),
+      'video_button_text' => get_field('video_button_text',$id)?: 'Play Video',
+    );
+
+
+    print_theme_template_part('watch', 'pages', $args);
+  }
+
+
+  public static function print_watch_single_page(){
+    if(!function_exists('get_field')){
+      echo 'ACF plugin required!';
+      return;
+    };
+
+    global $wp_roles;
+
+    $post = get_queried_object();
+
+    $date = new DateTime($post->post_date);
+
+    $video_url = get_field('video_url',$post->ID);
+
+    if(strpos($video_url, 'youtu')){
+      if(strpos($video_url, 'watch?v=')){
+        $id = explode('watch?v=', $video_url)[1];
+      }else{
+        $parts = explode('/', $video_url);
+        $id = $parts[count($parts) - 1];
+      }
+      $video_url = 'https://www.youtube.com/embed/'.$id;
+    }
+
+    if(strpos($video_url, 'vimeo')){
+      $parts = explode('/', $video_url);
+      $id = $parts[count($parts) - 1];
+      $video_url = 'https://player.vimeo.com/video/'.$id;
+    }
+
+    $author = get_user_by('ID', (int)$post->post_author);
+    $userdata = get_userdata($post->post_author);
+
+    $terms = wp_get_post_terms($post->ID, 'video_category', array('fields'=>'names'));
+
+    $args = array(
+      'related_items' => get_field('related_items', $obj_id),
+      'video_url' => $video_url,
+      'terms' => $terms,
+      'title'     => $post->post_title,
+      'name'      => $userdata->first_name.' '.$userdata->last_name,
+      'date_formatted' => $date->format('d F'),
+      'role' => $wp_roles->roles[$author->roles[0]]['name'],
+      'avatar_url' => get_avatar_url($post->post_author, array('size'=> 150)),
+      'text' => apply_filters('the_content', $post->post_content),
+    );
+
+    print_theme_template_part('video-single', 'pages', $args);
+  }
+
+  public static function print_service_single_page(){
+    if(!function_exists('get_field')){
+      echo 'ACF plugin required!';
+      return;
+    };
+
+    $obj = get_queried_object();
+    $obj_id = $obj->ID;
+
+     $bg     =  get_field('bg', $obj_id);
+
+     $items3 = get_field('block_items_3', $obj_id)?: array();
+     $length = ceil(count($items3)/2);
+     $items3 = array_chunk( $items3 ,$length);
+
+
+     clog($items3);
+
+
+
+    $args = array(
+      'bg'    => $bg ,
+      'title' => get_field('title', $obj_id)?: $obj->post_title,
+      'text'  => get_field('text', $obj_id),
+      'show_block_1'  => get_field('show_block_1', $obj_id),
+      'block_1_title'  => get_field('block_1_title', $obj_id),
+      'block_1_title_bg'  => get_field('block_1_title_bg', $obj_id),
+      'block_1_items'  => get_field('block_1_items', $obj_id),
+
+      'show_block_2'  => get_field('show_block_2', $obj_id),
+      'block_2_title'  => get_field('block_2_title', $obj_id),
+      'block_2_title_bg'  => get_field('block_2_title_bg', $obj_id),
+      'block_2_items'  => get_field('block_2_items', $obj_id),
+      'block_2_image'  => get_field('block_2_image', $obj_id),
+
+      'show_block_3'  => get_field('show_block_3', $obj_id),
+      'block_title_3'  => get_field('block_title_3', $obj_id),
+      'block_title_bg_3'  => get_field('block_title_bg_3', $obj_id),
+      'block_items_3'  => $items3 ,
+
+      'show_block_4'  => get_field('show_block_4', $obj_id),
+      'block_text_4'  => get_field('block_text_4', $obj_id),
+      'block_items_4'  => get_field('block_items_4', $obj_id),
+      'block_4_image'  => get_field('block_4_image', $obj_id),
+
+      'we_provide'  => get_field('we_provide', $obj_id),
+
+      'contact' => get_permalink(get_option('theme_page_contact_page')),
+    );
+
+
+    print_theme_template_part('service-single', 'pages', $args);
+  }
+
+
+  public static function print_contacts_page(){
+    $obj_id = get_queried_object_id();
+
+    $contact_form = get_field('contact_form', $obj_id);
+
+    $args = array(
+        'address' =>   str_replace(PHP_EOL, '<br>', get_field('welcome_address', $obj_id)),
+        'address_url' => get_field('welcome_address_url', $obj_id),
+        'email' => get_field('welcome_email', $obj_id),
+        'phones' => get_field('welcome_phones', $obj_id),
+        'schedule' => get_field('schedule', $obj_id),
+        'socials'    => array(
+          'twitter' => get_option('url_twitter'),
+          'facebook' => get_option('url_facebook'),
+          'instagram' => get_option('url_instagram'),
+          'youtube' => get_option('url_youtube'),
+        ),
+
+        'shortcode' => $contact_form ? sprintf('[contact-form-7 id="%s" title="%s"]',$contact_form ->ID, $contact_form->post_title ): false,
+    );
+    print_theme_template_part('contacts', 'pages', $args);
   }
 
   /**

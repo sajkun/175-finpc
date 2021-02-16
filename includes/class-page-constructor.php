@@ -51,6 +51,14 @@ class theme_construct_page{
     add_action('do_faq_page_content', array('theme_content_output', 'print_faq_page'));
 
     add_action('do_gallery_page_content', array('theme_content_output', 'print_gallery_page'));
+
+    add_action('do_watch_page_content', array('theme_content_output', 'print_watch_page'));
+
+    add_action('do_watch_single_page_content', array('theme_content_output', 'print_watch_single_page'));
+
+    add_action('do_service_single_page_content', array('theme_content_output', 'print_service_single_page'));
+
+    add_action('do_contacts_page_content', array('theme_content_output', 'print_contacts_page'));
   }
 
 

@@ -1214,7 +1214,13 @@ function play_video(url, event){
     var _url = 'https://www.youtube.com/embed/';
     var parts = url.split('\/');
 
-    var iframe = '<div class="popup-destroy"><div class="popup-destroy-inner"><i class="icon-close-destroy">×</i><iframe id="popup-iframe" src="'+_url+'/'+parts[parts.length -1]+'?autoplay=1&loop=0&rel=0&wmode=transparent" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div></div>';
+    var iframe = '<div class="popup-destroy"><div class="popup-destroy-inner"><i class="icon-close-destroy">×</i><iframe id="popup-iframe" src="'+_url+parts[parts.length -1]+'?autoplay=1&loop=0&rel=0&wmode=transparent" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div></div>';
+  }
+
+  if(url.indexOf('vimeo') >= 0){
+    var _url = 'https://player.vimeo.com/video/';
+    var parts = url.split('\/');
+    var iframe = '<div class="popup-destroy"><div class="popup-destroy-inner"><i class="icon-close-destroy">×</i><iframe id="popup-iframe" src="'+_url + parts[parts.length -1]+'?autoplay=1&loop=0&rel=0&wmode=transparent" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div></div>';
   }
 
   jQuery('.site-container').append(iframe);
@@ -1312,6 +1318,14 @@ jQuery(document.body).on('click', '.faq-item__title, .faq-item__trigger', functi
   jQuery(this).closest('.faq-item').toggleClass('active').siblings('.faq-item').removeClass('active').find('.faq-item__body').slideUp();
 
   jQuery(this).siblings('.faq-item__body').slideToggle('fast', function() {
+
+  });
+})
+
+jQuery(document.body).on('click', '.carousel-item__title, .carousel-item__trigger', function(){
+  jQuery(this).closest('.carousel-item').toggleClass('active').siblings('.carousel-item').removeClass('active').find('.carousel-item__body').slideUp();
+
+  jQuery(this).siblings('.carousel-item__body').slideToggle('fast', function() {
 
   });
 })

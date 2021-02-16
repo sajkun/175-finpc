@@ -2,7 +2,9 @@
   defined( 'ABSPATH' ) || exit;
 ?>
 
-<div class="heroscreen" <?php printf('style="background-image: url(%s);"', $welcome['bg']); ?>>
+<div class="heroscreen fullheight" <?php printf('style="background-image: url(%s);"', $welcome['bg']); ?>>
+
+  <div class="spacer-h-100"></div>
   <div class="container-lg fixed valign-center">
 
     <?php if ($welcome['title']): ?>
@@ -34,6 +36,7 @@
     </div>
     <?php endif ?>
 
+
     <ul class="menu-socials yellow">
       <?php foreach ($socials as $icon => $url):
          if(!$url) continue;
@@ -46,6 +49,7 @@
 
 
     <div class="spacer-h-50"></div>
+    <div class="spacer-h-100"></div>
   </div><!-- container-lg fixed -->
 
 
