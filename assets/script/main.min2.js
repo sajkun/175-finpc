@@ -1056,6 +1056,10 @@ if(document.getElementById('video-items')){
 
     computed: {
       by_category: function(){
+
+        if(!video_categories || video_categories.length ==0){
+          return [];
+        }
         var vm = this;
         var items = video_items.filter(e=>{
           return e.category.indexOf(vm.current_category) >=0;
