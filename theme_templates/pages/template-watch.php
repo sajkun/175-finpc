@@ -69,6 +69,8 @@
 <div class="hr"></div>
 <div class="spacer-h-30 spacer-h-lg-70"></div>
 
+
+<?php if ($categories && count($categories) > 0): ?>
 <div class="row">
   <div class="col-12 col-md-8">
     <h2 class="video-title">
@@ -120,6 +122,7 @@
 
 <div class="hr"></div>
 <div class="spacer-h-30 spacer-h-lg-70"></div>
+<?php endif ?>
 
 <div class="row">
   <div class="col-12 col-md-8">
