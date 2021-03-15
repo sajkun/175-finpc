@@ -683,11 +683,6 @@ class theme_content_output{
      $length = ceil(count($items3)/2);
      $items3 = array_chunk( $items3 ,$length);
 
-
-     clog($items3);
-
-
-
     $args = array(
       'bg'    => $bg ,
       'title' => get_field('title', $obj_id)?: $obj->post_title,
@@ -744,6 +739,125 @@ class theme_content_output{
         'shortcode' => $contact_form ? sprintf('[contact-form-7 id="%s" title="%s"]',$contact_form ->ID, $contact_form->post_title ): false,
     );
     print_theme_template_part('contacts', 'pages', $args);
+  }
+
+
+  public static function print_community_page(){
+    if(!function_exists('get_field')){
+      echo 'ACF plugin required!';
+      return;
+    };
+
+    global $theme_init;
+
+    $obj_id = get_queried_object_id();
+
+    $contact_form = get_field('contact_form', $obj_id);
+    $bg     =  get_field('bg', $obj_id);
+
+    $args = array(
+      'bg'    =>  wp_get_attachment_image_url($bg , 'full'),
+      'title' => get_field('title', $obj_id)?: $obj->post_title,
+      'text'  => get_field('text', $obj_id),
+    );
+
+    print_theme_template_part('heroscreen', 'globals', $args);
+
+    $community = get_posts(array(
+      'posts_per_page' => -1,
+      'post_type'  => 'community-item',
+    ));
+
+    $community = array_map(function($el){
+      $date = new DateTime($el->post_date);
+
+      $terms = wp_get_post_terms($el->ID, 'community_tag', array('fields' => 'names'));
+      $terms  = array_map(function($e){ return '#'.$e;}, $terms);
+      $img_id = get_post_thumbnail_id($el);
+
+      $author = get_user_by('ID', (int)$el->post_author);
+      $username = trim(get_user_meta($el->post_author,'first_name',true). ' ' .get_user_meta($el->post_author,'last_name',true))?: $author->data->user_nicename;
+
+      return array(
+        'url' => get_permalink($el),
+        'title' => $el->post_title,
+        'text' => strip_tags(strip_shortcodes($el->post_content)),
+        'image' => wp_get_attachment_image_url($img_id, 'podcasts_img'),
+        'date' => $date->format('M d, Y H:ia'),
+        'categories' => $terms,
+        'author' => 'by '.$username,
+      );
+
+    }, $community);
+
+
+    $terms = get_terms( [
+      'taxonomy' => 'community_tag',
+      'hide_empty' => true,
+      'fields' => 'names'
+    ] );
+
+
+    $terms  = array_map(function($e){ return '#'.$e;}, $terms);
+
+    wp_localize_script($theme_init->main_script_slug, 'community_items', $community);
+    wp_localize_script($theme_init->main_script_slug, 'terms', $terms);
+
+    print_theme_template_part('community', 'pages', $args);
+  }
+
+  public static function print_community_article(){
+    if(!function_exists('get_field')){
+      echo 'ACF plugin required!';
+      return;
+    };
+
+    global $theme_init;
+    $el = get_queried_object();
+    $obj = get_queried_object();
+    $obj_id = get_queried_object_id();
+
+    $obj_id = get_queried_object_id();
+    $img_id = get_post_thumbnail_id($el);
+
+    $date = new DateTime($el->post_date);
+
+    $terms = wp_get_post_terms($el->ID, 'community_tag', array('fields' => 'names'));
+    $terms  = array_map(function($e){ return '#'.$e;}, $terms);
+    $img_id = get_post_thumbnail_id($el);
+
+    $author = get_user_by('ID', (int)$el->post_author);
+    $username = trim(get_user_meta($el->post_author,'first_name',true). ' ' .get_user_meta($el->post_author,'last_name',true))?: $author->data->user_nicename;
+
+    $video = get_field('items', $obj_id);
+
+    $videos = array_map(function($el){
+
+      $img_id = get_post_thumbnail_id($el);
+      $date = new DateTime($el->post_date);
+
+      return array(
+        'url'  => get_permalink($el) ,
+        'image' =>  wp_get_attachment_image_url($img_id, 'video_thumb'),
+        'title' => $el->post_title,
+        'date'  => $date->format('d M Y'),
+      );
+    }, $video);
+
+   clog($videos);
+
+    $args = array(
+      'bg'   => wp_get_attachment_image_url($img_id, 'full'),
+      'title' => get_field('title', $obj_id)?: $obj->post_title,
+      'subtitle'  => implode(', ', $terms) . ' ' .$date->format('M d, Y H:ia') . ' by '.  $username ,
+      'content'  => apply_filters('the_content', $el->post_content),
+      'videos' => $videos,
+      'obj' => $obj,
+      'videos_url' => get_option('theme_page_video_page')? get_permalink(get_option('theme_page_video_page')) : false,
+    );
+
+
+    print_theme_template_part('community-single', 'pages', $args);
   }
 
   /**

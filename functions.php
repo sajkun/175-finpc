@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 class velesh_init_theme{
 
   /* main style location  */
-  public $main_style = '/assets/css/main.min3.css';
+  public $main_style = '/assets/css/main.min4.css';
 
   /*theme style file slug*/
   public $main_style_slug = 'theme-main-style-dev1';
@@ -29,13 +29,13 @@ class velesh_init_theme{
   public $font = '/assets/fonts/font.css';
 
   /* main script location  */
-  public $main_script= '/assets/script/main.min2.js';
+  public $main_script= '/assets/script/main.min3.js';
 
   /* main script slug */
   public $main_script_slug = 'theme-main-script-dev1';
 
   /* svg sprites files slug for local storage */
-  public $svg_sprite_slug = 'svg_sprite_175';
+  public $svg_sprite_slug = 'svg_sprite_175_2';
 
 
 
@@ -474,6 +474,7 @@ class velesh_init_theme{
       'contact_page'         => __('Contacts Page', 'theme-translations'),
       'term_page'             => __('Terms and Conditions', 'theme-translations'),
       'gallery_page'             => __('Gallery', 'theme-translations'),
+      'video_page'             => __('Video Page', 'theme-translations'),
     );
 
     foreach ($options as $key => $name) {

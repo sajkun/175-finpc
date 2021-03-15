@@ -653,7 +653,7 @@ Vue.component('community-item',{
 
   template: `
     <div class="community-item">
-      <div class="community-item__image"><a><img :src="info.image" alt=""></a></div>
+      <div class="community-item__image"><a  :href="info.url" ><img :src="info.image" alt=""></a></div>
       <div class="community-item__content">
         <a :href="info.url" class="community-item__title">{{info.title}}</a>
         <span class="community-item__tags">{{tags}}</span>
@@ -1182,53 +1182,53 @@ if(document.getElementById('video-items')){
 }
 if(document.getElementById('community-container')){
 
-  var community_items = [
-    {
-      url: 'some turl',
-      title: 'some title',
-      text: 'The Data Governance Watershed “You’ve been breached!” These are words none of us want to hear, but the situation is almost inevitable. When the breach does occur, will your data governance structure help to protect you? Many organisations are at a data governance.The Data Governance Watershed “You’ve been breached!” These are words none of us want to hear, but the situation is almost inevitable. When the breach does occur, will your data governance structure help to protect you? Many organisations are at a data governance.',
-      image: '/assets/images/c/c11.jpg',
-      date: 'August 3rd, 2020 11:40AM',
-      categories: ['#Spotligh', '#Refund'],
-      author: 'by Christopher McNaughton',
-    },
-    {
-      url: 'some turl',
-      title: 'some title',
-      text: 'some text',
-      image: '/assets/images/c/c11.jpg',
-      date: 'August 3rd, 2020 11:40AM',
-      categories: ['#Spotligh', '#Refund'],
-      author: 'by Christopher McNaughton',
-    },
-    {
-      url: 'some turl',
-      title: 'some title',
-      text: 'some text',
-      image: '/assets/images/c/c11.jpg',
-      date: 'August 3rd, 2020 11:40AM',
-      categories: ['#Spotligh', '#Refund'],
-      author: 'by Christopher McNaughton',
-    },
-    {
-      url: 'some turl',
-      title: 'some title',
-      text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis ab, iste sed eos aliquid deleniti repellat ipsam sapiente eum repudiandae ea excepturi, reprehenderit veritatis ut illo id, quam accusamus quaerat?',
-      image: '/assets/images/c/c11.jpg',
-      date: 'August 3rd, 2020 11:40AM',
-      categories: ['#Spotligh', '#Business'],
-      author: 'by Christopher McNaughton',
-    },
-    {
-      url: 'some turl',
-      title: 'some title',
-      text: 'The Data Governance Watershed “You’ve been breached!” These are words none of us want to hear, but the situation is almost inevitable. When the breach does occur, will your data governance structure help to protect you? Many organisations are at a data governance.',
-      image: '/assets/images/c/c11.jpg',
-      date: 'August 3rd, 2020 11:40AM',
-      categories: ['#Spotligh', '#Refund'],
-      author: 'by Christopher McNaughton',
-    },
-  ];
+  // var community_items = [
+  //   {
+  //     url: 'some turl',
+  //     title: 'some title',
+  //     text: 'The Data Governance Watershed “You’ve been breached!” These are words none of us want to hear, but the situation is almost inevitable. When the breach does occur, will your data governance structure help to protect you? Many organisations are at a data governance.The Data Governance Watershed “You’ve been breached!” These are words none of us want to hear, but the situation is almost inevitable. When the breach does occur, will your data governance structure help to protect you? Many organisations are at a data governance.',
+  //     image: '/assets/images/c/c11.jpg',
+  //     date: 'August 3rd, 2020 11:40AM',
+  //     categories: ['#Spotligh', '#Refund'],
+  //     author: 'by Christopher McNaughton',
+  //   },
+  //   {
+  //     url: 'some turl',
+  //     title: 'some title',
+  //     text: 'some text',
+  //     image: '/assets/images/c/c11.jpg',
+  //     date: 'August 3rd, 2020 11:40AM',
+  //     categories: ['#Spotligh', '#Refund'],
+  //     author: 'by Christopher McNaughton',
+  //   },
+  //   {
+  //     url: 'some turl',
+  //     title: 'some title',
+  //     text: 'some text',
+  //     image: '/assets/images/c/c11.jpg',
+  //     date: 'August 3rd, 2020 11:40AM',
+  //     categories: ['#Spotligh', '#Refund'],
+  //     author: 'by Christopher McNaughton',
+  //   },
+  //   {
+  //     url: 'some turl',
+  //     title: 'some title',
+  //     text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis ab, iste sed eos aliquid deleniti repellat ipsam sapiente eum repudiandae ea excepturi, reprehenderit veritatis ut illo id, quam accusamus quaerat?',
+  //     image: '/assets/images/c/c11.jpg',
+  //     date: 'August 3rd, 2020 11:40AM',
+  //     categories: ['#Spotligh', '#Business'],
+  //     author: 'by Christopher McNaughton',
+  //   },
+  //   {
+  //     url: 'some turl',
+  //     title: 'some title',
+  //     text: 'The Data Governance Watershed “You’ve been breached!” These are words none of us want to hear, but the situation is almost inevitable. When the breach does occur, will your data governance structure help to protect you? Many organisations are at a data governance.',
+  //     image: '/assets/images/c/c11.jpg',
+  //     date: 'August 3rd, 2020 11:40AM',
+  //     categories: ['#Spotligh', '#Refund'],
+  //     author: 'by Christopher McNaughton',
+  //   },
+  // ];
 
   _community_ = new Vue({
     el: '#community-container',
@@ -1242,7 +1242,7 @@ if(document.getElementById('community-container')){
       add: 4,
       search: '',
       selected_category: '',
-      categories: ['#Spotligh','#Business' ],
+      categories: terms
     },
 
     computed:{

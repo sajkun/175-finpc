@@ -59,6 +59,9 @@ class theme_construct_page{
     add_action('do_service_single_page_content', array('theme_content_output', 'print_service_single_page'));
 
     add_action('do_contacts_page_content', array('theme_content_output', 'print_contacts_page'));
+
+    add_action('do_community_page_content', array('theme_content_output', 'print_community_page'));
+    add_action('do_community_single_page_content', array('theme_content_output', 'print_community_article'));
   }
 
 
