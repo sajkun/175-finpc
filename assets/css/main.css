@@ -4780,6 +4780,7 @@ html {
 
 @media (min-width: 992px) {
   .border-title__text {
+    padding-left: 30px;
     font-size: 65px;
     line-height: 65px;
   }
@@ -6284,29 +6285,29 @@ html {
 
 @media (min-width: 552px) {
   .popup-destroy iframe {
-    width: 500px;
-    height: 312px;
+    width: 375px;
+    height: 234px;
   }
 }
 
 @media (min-width: 768px) {
   .popup-destroy iframe {
-    width: 700px;
-    height: 437px;
+    width: 525px;
+    height: 327px;
   }
 }
 
 @media (min-width: 992px) {
   .popup-destroy iframe {
-    width: 900px;
-    height: 562px;
+    width: 675px;
+    height: 421px;
   }
 }
 
 @media (min-width: 1200px) {
   .popup-destroy iframe {
-    width: 1200px;
-    height: 675px;
+    width: 900px;
+    height: 506px;
   }
 }
 
@@ -6538,10 +6539,10 @@ html {
   display: block;
   color: #212121;
   font-family: "Montserrat", sans-serif;
-  font-size: 24px;
+  font-size: 18px;
   font-weight: 700;
   font-style: italic;
-  line-height: 36px;
+  line-height: 24px;
   letter-spacing: 0.18px;
   position: relative;
   margin: 0;
@@ -6551,8 +6552,8 @@ html {
 
 @media (min-width: 992px) {
   .carousel-testi__text {
-    font-size: 36px;
-    line-height: 47px;
+    font-size: 28px;
+    line-height: 36px;
     padding: 40px 60px;
   }
 }
@@ -6574,8 +6575,8 @@ html {
 
 @media (min-width: 768px) {
   .carousel-testi__text:after, .carousel-testi__text:before {
-    font-size: 100px;
-    line-height: 100px;
+    font-size: 80px;
+    line-height: 80px;
   }
 }
 

@@ -156,17 +156,20 @@ class theme_content_output{
 
     $video = get_posts($args)?: array();
 
-    $video = array_map(function($el){
-      $date = new DateTime($el->post_date);
-      $id = get_post_thumbnail_id( $el->ID );
+    $_video = get_field('media_items_list', $el->ID );
+
+    clog( $_video );
+
+     $video = array_map(function($el){
+      $id = $el['video_thumb'];
 
       return array(
-        'title' => $el->post_title,
+        'title' => $el['title_video'],
         'image' => wp_get_attachment_image_url($id , 'video_thumb'),
-        'url'   => trim(str_replace('watch?v=', '',get_field('video_url', $el->ID ))),
-        'date'  => $date->format('d F'),
+        'url'   => trim(str_replace('watch?v=', '', $el['video_url'] )),
+        'date'  => $date['video_date'],
       );
-    }, $video);
+     }, $_video );
 
     $testimonials = get_posts(array(
       'post_type' => 'theme_testimonials',

@@ -100,16 +100,15 @@
 </div><!-- heroscreen -->
 
 <div class="spacer-h-lg-100 spacer-h-30"></div>
-<div class="spacer-h-xl-100"></div>
 
 <section class="mission">
-  <div class="container container-fixed">
+  <div class="container-xl container-fixed">
     <div class="row">
-      <div class="col-md-6 image-holder">
+      <div class="col-12 col-md-6 col-lg-5 image-holder">
         <img src="<?php echo $mission['img'];?>" alt="">
         <div class="spacer-h-30 spacer-h-md-0"></div>
       </div>
-      <div class="col-md-6 valign-center-md">
+      <div class="col-12 col-md-6 col-lg-7 valign-center-md">
         <div class="border-title">
           <div class="border-title__content">
             <div class="border-title__bg-text"><?php echo $mission['title_border'];?></div>
@@ -126,7 +125,6 @@
 </section>
 
 <div class="spacer-h-lg-100 spacer-h-30"></div>
-<div class="spacer-h-xl-100"></div>
 
 <?php if ($wedo['items']): ?>
 
@@ -166,15 +164,14 @@
   <div class="spacer-h-lg-50 spacer-h-lg-100"></div>
 </section>
 <div class="spacer-h-lg-100 spacer-h-30"></div>
-<div class="spacer-h-xl-100"></div>
 <?php endif ?>
 
 <?php if ($videos['items']): ?>
 <section class="media">
   <div class="container-lg container-fixed">
-    <div class="border-title to-right">
+    <div class="border-title to-left">
       <div class="border-title__content">
-        <div class="border-title__bg-text"><?php echo $videos['title_border']; ?></div>
+        <div class="border-title__bg-text padding"><?php echo $videos['title_border']; ?></div>
         <h2 class="border-title__text"><?php echo $videos['title']; ?></h2>
       </div>
     </div>
@@ -238,7 +235,6 @@
   </section>
 
   <div class="spacer-h-lg-100 spacer-h-30"></div>
-  <div class="spacer-h-lg-70"></div>
 <?php endif ?>
 
 <?php if ($testimonials): ?>
@@ -284,7 +280,6 @@
 <?php endif ?>
 
 <div class="spacer-h-30 spacer-h-lg-100"></div>
-<div class="spacer-h-lg-100"></div>
 
 <section class="form-holder">
  <div class="container-md">
