@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 class velesh_init_theme{
 
   /* main style location  */
-  public $main_style = '/assets/css/main.min5.css';
+  public $main_style = '/assets/css/main.min6.css';
 
   /*theme style file slug*/
   public $main_style_slug = 'theme-main-style-dev1';
@@ -29,7 +29,7 @@ class velesh_init_theme{
   public $font = '/assets/fonts/font.css';
 
   /* main script location  */
-  public $main_script= '/assets/script/main.min3.js';
+  public $main_script= '/assets/script/main.min4.js';
 
   /* main script slug */
   public $main_script_slug = 'theme-main-script-dev1';
@@ -139,7 +139,7 @@ class velesh_init_theme{
 
     wp_enqueue_script('vuejs', THEME_URL.'/assets/libs/vuejs/prod.js', array(), THEME_VERSION, true);
 
-    wp_enqueue_script('vuejs', THEME_URL.'/assets/libs/vuejs/prod.js', array(), THEME_VERSION, true);
+    wp_enqueue_script('jspdf', 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.0.943/pdf.min.js', array(), THEME_VERSION, true);
 
     wp_enqueue_script($this->main_script_slug, THEME_URL.$this->main_script, array('jquery'), THEME_VERSION, true);
 

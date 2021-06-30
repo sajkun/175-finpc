@@ -77,7 +77,7 @@
       <i class="icon-trend">
         <img src="<?php echo THEME_URL ?>/assets/images/speaker.png" alt="">
       </i>
-      Trending by Topic
+      <?php echo $title_category_selector; ?>
     </h2>
   </div>
   <div class="col-12 col-md-4 text-right-md valign-center-md">
@@ -124,13 +124,68 @@
 <div class="spacer-h-30 spacer-h-lg-70"></div>
 <?php endif ?>
 
+<?php if ($additional_sections): ?>
+  <?php foreach ($additional_sections as $key => $section):
+    $icon = wp_get_attachment_image_url($section['icon'], 'full');
+    $title = $section['title']?: $section['category']->name;
+    $videos = get_posts(array(
+        'post_type' => 'theme_media',
+        'numberposts' => -1,
+        'tax_query' => array(
+          array(
+            'taxonomy' => 'video_category',
+            'field' => 'term_id',
+            'terms' =>  $section['category']->term_id, /// Where term_id of Term 1 is "1".
+            'include_children' => false
+          )
+        )
+      ));
+
+    if(!$videos) {continue;}
+    ?>
+    <div class="row">
+      <div class="col-12 col-md-8">
+        <h2 class="video-title">
+          <i class="icon-trend">
+            <img <?php echo 'style="max-width: 33px; max-height: 33px"'?> src="<?php echo $icon; ?>" alt="">
+          </i>
+          <?php echo $title; ?>
+        </h2>
+      </div>
+      <div class="col-12 col-md-4 text-right-md valign-center-md">
+      </div>
+    </div>
+    <div class="spacer-h-30"></div>
+    <div class="video-block">
+      <div class="row">
+        <?php foreach ($videos as $vid):
+          $id = get_post_thumbnail_id( $vid->ID );
+          $img = wp_get_attachment_image_url($id , 'video_thumb');
+          $date = new DateTime( $vid->post_date );
+          ?>
+          <div class="col-12 col-md-4 col-lg-3">
+            <div class="video-block__item">
+              <a href="<?php echo get_permalink( $vid ); ?>" class="video-block__item-image">
+                <img src="<?php echo ( $img ); ?>" alt="<?php echo $vid->post_title; ?>">
+              </a>
+              <a href="<?php echo get_permalink( $vid ); ?>" class="video-block__item-title"><?php echo $vid->post_title; ?></a>
+              <span class="video-block__item-date"><?php echo $date->format('d F'); ?></span>
+              <div class="spacer-h-30"></div>
+            </div>
+          </div>
+        <?php endforeach ?>
+      </div><!-- row -->
+    </div><!-- video-block -->
+  <?php endforeach ?>
+<?php endif ?>
+
 <div class="row">
   <div class="col-12 col-md-8">
     <h2 class="video-title">
       <i class="icon-trend">
         <img src="<?php echo THEME_URL ?>/assets/images/clock.png" alt="">
       </i>
-      All 5-Minute Videos
+      <?php echo $title_all_video; ?>
     </h2>
   </div>
   <div class="col-12 col-md-4 text-right-md valign-center-md">

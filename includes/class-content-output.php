@@ -607,15 +607,17 @@ class theme_content_output{
 
     $args = array(
       'categories' => $category,
-      'background_image' => get_field('background_image',$id),
-      'title' => get_field('title',$id),
-      'text' => get_field('blockquote',$id),
-      'author' => get_field('author',$id),
-      'author_position' => get_field('author_position',$id),
-      'video_url' => get_field('video_url',$id),
-      'video_button_text' => get_field('video_button_text',$id)?: 'Play Video',
+      'background_image'        => get_field('background_image',$id),
+      'title_all_video'         => get_field('title_category_selector',$id)?:'All 5-Minute Videos',
+      'title_category_selector' => get_field('title_all_video',$id)?:'Trending by Topic',
+      'title'                   => get_field('title',$id),
+      'additional_sections'     => get_field('additional_sections',$id),
+      'text'                    => get_field('blockquote',$id),
+      'author'                  => get_field('author',$id),
+      'author_position'         => get_field('author_position',$id),
+      'video_url'               => get_field('video_url',$id),
+      'video_button_text'       => get_field('video_button_text',$id)?: 'Play Video',
     );
-
 
     print_theme_template_part('watch', 'pages', $args);
   }

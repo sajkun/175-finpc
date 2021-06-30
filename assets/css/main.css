@@ -1,5 +1,5 @@
 @charset "UTF-8";
-.heroscreen__video .icon .wrapper, .heroscreen__video .icon .inner, .heroscreen__video .icon .arrow, .play-video .wrapper, .play-video .inner, .play-video .arrow, .article-carousel__item-image .icon-video, .carousel-testi .icon-video, .carousel-testi__arrows div svg, .faq-item__trigger:before, .faq-item__trigger:after, .carousel-item__trigger:before, .carousel-item__trigger:after, .download-item__icon, .download-item__icon:before, .download-item__icon:after {
+.heroscreen__video .icon .wrapper, .heroscreen__video .icon .inner, .heroscreen__video .icon .arrow, .play-video .wrapper, .play-video .inner, .play-video .arrow, .article-carousel__item-image .icon-video, .carousel-testi .icon-video, .carousel-testi__arrows div svg, .popup-preview__inner, .faq-item__trigger:before, .faq-item__trigger:after, .carousel-item__trigger:before, .carousel-item__trigger:after, .download-item__icon, .download-item__icon:before, .download-item__icon:after {
   position: absolute;
   left: 0;
   right: 0;
@@ -6709,6 +6709,55 @@ html {
   .shift-text {
     margin-bottom: -70px;
   }
+}
+
+.popup-preview {
+  position: fixed;
+  z-index: 100;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+@media (min-width: 640px) {
+  .popup-preview {
+    left: 30px;
+    top: 30px;
+    bottom: 30px;
+    right: 30px;
+  }
+}
+
+.popup-preview__inner {
+  background: #fff;
+  max-width: 640px;
+  max-width: 640px;
+  text-align: center;
+  position: absolute;
+  overflow: auto;
+}
+
+.popup-preview__inner .close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 24px;
+  width: 16px;
+  height: 16px;
+  line-height: 16px;
+  color: #f00;
+  display: block;
+  font-style: normal;
+  cursor: pointer;
+}
+
+.popup-preview__inner img {
+  max-width: 100%;
+  max-width: 100%;
+  -o-object-fit: contain;
+     object-fit: contain;
 }
 
 /*
