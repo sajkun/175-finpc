@@ -4,7 +4,7 @@
 
 <div class="heroscreen fullheight" <?php printf('style="background-image: url(%s);"', $welcome['bg']); ?>>
 
-  <div class="spacer-h-100"></div>
+  <div class="spacer-h-50"></div>
   <div class="container-lg fixed valign-center">
 
     <?php if ($welcome['title']): ?>
@@ -49,7 +49,7 @@
 
 
     <div class="spacer-h-50"></div>
-    <div class="spacer-h-100"></div>
+    <div class="spacer-h-50"></div>
   </div><!-- container-lg fixed -->
 
 
@@ -99,7 +99,7 @@
   <?php endif; ?>
 </div><!-- heroscreen -->
 
-<div class="spacer-h-lg-100 spacer-h-30"></div>
+<div class="spacer-h-lg-50 spacer-h-30"></div>
 
 <section class="mission">
   <div class="container-xl container-fixed">
@@ -124,13 +124,13 @@
   </div><!-- container -->
 </section>
 
-<div class="spacer-h-lg-100 spacer-h-30"></div>
+<div class="spacer-h-lg-50 spacer-h-30"></div>
 
 <?php if ($wedo['items']): ?>
 
 <section class="we-do">
   <div class="container">
-    <div class="spacer-h-lg-50 spacer-h-lg-100"></div>
+    <div class="spacer-h-50"></div>
     <div class="row">
       <div class="col-md-2 valign-center ">
         <div class="border-title rotate">
@@ -161,9 +161,9 @@
       </div><!-- col-lg-4 -->
     </div>
   </div>
-  <div class="spacer-h-lg-50 spacer-h-lg-100"></div>
+  <div class="spacer-h-lg-50 spacer-h-lg-50 "></div>
 </section>
-<div class="spacer-h-lg-100 spacer-h-30"></div>
+<div class="spacer-h-lg-50 spacer-h-30"></div>
 <?php endif ?>
 
 <?php if ($videos['items']): ?>
@@ -203,7 +203,7 @@
     </div><!-- articles-body -->
   </div><!-- container -->
 </section>
-<div class="spacer-h-lg-110 spacer-h-30"></div>
+<div class="spacer-h-lg-50 spacer-h-30"></div>
 <?php endif ?>
 
 <?php if ($steps['items']): ?>
@@ -234,7 +234,7 @@
     </div><!-- container -->
   </section>
 
-  <div class="spacer-h-lg-100 spacer-h-30"></div>
+  <div class="spacer-h-lg-50 spacer-h-30"></div>
 <?php endif ?>
 
 <?php if ($testimonials): ?>
@@ -279,11 +279,11 @@
 </section>
 <?php endif ?>
 
-<div class="spacer-h-30 spacer-h-lg-100"></div>
+<div class="spacer-h-30 spacer-h-lg-50 "></div>
 
 <section class="form-holder">
  <div class="container-md">
- <div class="spacer-h-lg-100"></div>
+ <div class="spacer-h-lg-50 "></div>
  <h4 class="section-title">Request <br> a call back</h4>
   <div class="row">
     <div class="col-lg-5">

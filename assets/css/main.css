@@ -6760,6 +6760,30 @@ html {
      object-fit: contain;
 }
 
+section.section-finance {
+  zoom: 80%;
+}
+
+section.section-finance .section-finance__text {
+  font-size: 16px;
+}
+
+section.we-do {
+  zoom: 80%;
+}
+
+section.we-do .we-do__text {
+  font-size: 16px;
+}
+
+section.mission {
+  zoom: 80%;
+}
+
+section.mission .our-mission {
+  font-size: 16px;
+}
+
 /*
   Table of Contents
 
