@@ -512,46 +512,43 @@ var animation_mixin = {
     }
   }
 }
+Vue.component('gallery-item', {
+	data: function () {
+		return {
+			info: this._info,
+		}
+	},
 
-Vue.component('gallery-item',{
-  data:function(){
-    return {
-      info: this._info,
-    };
-  },
+	props: ['_info'],
 
-  props: [
-    '_info',
-  ],
+	watch: {
+		_info: function (val) {
+			this.info = val
+		},
+	},
 
-  watch: {
-    _info:function(val){
-      this.info = val;
-    }
-  },
+	beforeMount: function () {
+		this.info = this._info
+	},
 
-  beforeMount: function(){
-    this.info = this._info;
-  },
+	mounted: function () {
+		console.log(this.info)
+	},
 
-  mounted: function(){},
+	methods: {
+		show_gallery: function () {
+			jQuery.fancybox.open(strip(this.info.items), {
+				helpers: {
+					thumbs: {
+						width: 75,
+						height: 50,
+					},
+				},
+			})
+		},
+	},
 
-  methods: {
-    show_gallery: function(){
-      jQuery.fancybox.open(
-        strip(this.info.items)
-        , {
-        helpers : {
-          thumbs : {
-            width: 75,
-            height: 50,
-           }
-        }
-      });
-    },
-  },
-
-  template: `
+	template: `
     <div class="gallery-item" v-on:click="show_gallery">
       <div class="gallery-item__image">
         <img :src="info.thumb" alt="">
@@ -560,7 +557,7 @@ Vue.component('gallery-item',{
       <span>{{info.tags}} </span></div>
     </div>
   `,
-});
+})
 Vue.component('download-item',{
   data: function(){
     return {
@@ -724,218 +721,66 @@ var _gallery_;
 var _download_;
 var _video_;
 var _community_;
-// var gallery_items = [
-//   {
-//     thumb: 'assets/images/c/01.png',
-//     tags : ['#team', '#community'],
-//     items: [
-//       {
-//          href: 'assets/images/c/01.png',
-//       },
-//       {
-//          href: 'assets/images/c/02.png',
-//       },
-//       {
-//          href: 'assets/images/c/03.png',
-//       },
-//     ],
-//     date: '2021-01-01 00:00:00',
-//   },
-//   {
-//     thumb: 'assets/images/c/02.png',
-//     tags : ['#team', '#community'],
-//     items: [
-//       {
-//          href: 'assets/images/c/02.png',
-//          title: '',
-//       },
-//       {
-//          href: 'assets/images/c/04.png',
-//          title: '',
-//       },
-//       {
-//          href: 'assets/images/c/03.png',
-//          title: '',
-//       },
-//     ],
-//     date: '2021-01-05 00:00:00',
-//   },
-//   {
-//     thumb: 'assets/images/c/03.png',
-//     tags : ['#team'],
-//     items: [
-//       {
-//          href: 'assets/images/c/03.png',
-//          title: '',
-//       },
-//       {
-//          href: 'assets/images/c/01.png',
-//          title: '',
-//       },
-//       {
-//          href: 'assets/images/c/03.png',
-//          title: '',
-//       },
-//     ],
-//     date: '2021-01-05 00:00:00',
-//   },
-//   {
-//     thumb: 'assets/images/c/04.png',
-//     tags : ['#team', '#test'],
-//     items: [
-//       {
-//          href: 'assets/images/c/01.png',
-//          title: '',
-//       },
-//       {
-//          href: 'assets/images/c/02.png',
-//          title: '',
-//       },
-//       {
-//          href: 'assets/images/c/03.png',
-//          title: '',
-//       },
-//     ],
-//     date: '2020-12-05 00:00:00',
-//   },
-//   {
-//     thumb: 'assets/images/c/01.png',
-//     tags : ['#team', '#community'],
-//     items: [
-//       {
-//          href: 'assets/images/c/01.png',
-//       },
-//       {
-//          href: 'assets/images/c/02.png',
-//       },
-//       {
-//          href: 'assets/images/c/03.png',
-//       },
-//     ],
-//     date: '2021-01-01 00:00:00',
-//   },
-//   {
-//     thumb: 'assets/images/c/02.png',
-//     tags : ['#team', '#community'],
-//     items: [
-//       {
-//          href: 'assets/images/c/02.png',
-//          title: '',
-//       },
-//       {
-//          href: 'assets/images/c/04.png',
-//          title: '',
-//       },
-//       {
-//          href: 'assets/images/c/03.png',
-//          title: '',
-//       },
-//     ],
-//     date: '2021-01-05 00:00:00',
-//   },
-//   {
-//     thumb: 'assets/images/c/03.png',
-//     tags : ['#team'],
-//     items: [
-//       {
-//          href: 'assets/images/c/03.png',
-//          title: '',
-//       },
-//       {
-//          href: 'assets/images/c/01.png',
-//          title: '',
-//       },
-//       {
-//          href: 'assets/images/c/03.png',
-//          title: '',
-//       },
-//     ],
-//     date: '2021-01-05 00:00:00',
-//   },
-//   {
-//     thumb: 'assets/images/c/04.png',
-//     tags : ['#team', '#test'],
-//     items: [
-//       {
-//          href: 'assets/images/c/01.png',
-//          title: '',
-//       },
-//       {
-//          href: 'assets/images/c/02.png',
-//          title: '',
-//       },
-//       {
-//          href: 'assets/images/c/03.png',
-//          title: '',
-//       },
-//     ],
-//     date: '2020-12-05 00:00:00',
-//   },
-// ];
+if (document.getElementById('gallery')) {
+	_gallery_ = new Vue({
+		el: '#gallery',
 
+		data: {
+			items: gallery_items,
+			limit: 6,
+			step: 6,
+			sort_by: false,
+		},
 
-if(document.getElementById('gallery')){
-  _gallery_ = new Vue({
-    el: '#gallery',
+		mixins: [animation_mixin],
 
-    data: {
-      items: gallery_items,
-      limit: 6,
-      step : 6,
-      sort_by: false,
-    },
+		computed: {
+			_items: function () {
+				var items = this.items
+				var vm = this
 
-    mixins: [animation_mixin],
+				items.sort(function (a, b) {
+					var date_a = new Date(a.date.replace(/\s/, 'T'))
+					var date_b = new Date(a.date.replace(/\s/, 'T'))
+					if (date_a == date_b) {
+						return 0
+					}
 
-    computed:{
-      _items:function(){
-        var items = this.items;
-        var vm= this;
+					switch (vm.sort_by) {
+						case 'the newest':
+							return date_b < date_a ? 1 : -1
+							break
+						case 'the oldest':
+							return date_b > date_a ? 1 : -1
+							break
+						default:
+							return 0
+							break
+					}
+				})
 
-        items.sort(function (a, b){
-          var date_a = new Date(a.date.replace(/\s/, 'T'));
-          var date_b = new Date(a.date.replace(/\s/, 'T'));
-          if(date_a == date_b){
-            return 0;
-          }
+				return items.slice(0, this.limit)
+			},
 
-          switch(vm.sort_by){
-            case 'the newest':
-              return date_b < date_a ? 1 : -1;
-              break
-            case 'the oldest':
-              return date_b > date_a ? 1 : -1;
-              break
-            default:
-              return 0;
-              break;
-          }
+			show_button: function () {
+				return this.items.length > this.limit
+			},
+		},
 
-        });
+		mounted: function () {
+			this.sort_by = this.$refs.sort_select.value.toLowerCase()
+		},
 
-        return items.slice(0, this.limit);
-      },
+		methods: {
+			do_sort: function () {
+				this.sort_by = this.$refs.sort_select.value.toLowerCase()
+			},
 
-      show_button: function(){
-        return this.items.length > this.limit;
-      },
-    },
-
-    mounted: function(){
-      console.log('init gallery');
-      this.sort_by = this.$refs.sort_select.value.toLowerCase();
-    },
-
-    methods:{
-      do_sort: function(){
-        this.sort_by = this.$refs.sort_select.value.toLowerCase();
-      },
-
-      show_more: function(){
-        this.limit +=this.step;
-      },
-    }
-  });
+			show_more: function () {
+				this.limit += this.step
+			},
+		},
+	})
 }
 // var downloads = [
 //   {

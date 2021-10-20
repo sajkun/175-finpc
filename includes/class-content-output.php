@@ -512,17 +512,18 @@ class theme_content_output{
 
     $galleries = get_posts($args);
 
-    $galleries = array_map(function($el){
-      $id   = get_post_thumbnail_id( $el->ID );
+     $galleries = array_map(function($el){
+     $id   = get_post_thumbnail_id( $el->ID );
 
      $tags   = get_field('hastags', $el->ID);
      $images = get_field('images', $el->ID)?: array();
 
+     
      $images = array_map(function($el){
-       return array('href' => $el);
-     }, $images);
-
-
+        return array('href' => $el['url'], 'opts'=> array('caption' => $el['description'], 'thumbs' => $el['sizes']['thumbnail']));
+      }, $images);
+      
+      clog($images);
       return array(
         'thumb'  => wp_get_attachment_image_url($id , 'gallery_img'),
         'tags' => get_field('hastags', $el->ID),
