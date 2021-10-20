@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 class velesh_init_theme{
 
   /* main style location  */
-  public $main_style = '/assets/css/main.min6.css';
+  public $main_style = '/assets/css/main.min8.css';
 
   /*theme style file slug*/
   public $main_style_slug = 'theme-main-style-dev1';
@@ -520,8 +520,8 @@ class velesh_init_theme{
     foreach ($pages  as $id => $page) {
       $selected = (esc_attr( get_option($option_name) ) == $page->ID )? 'selected = "selected"' : '';
       ?>
-        <option <?php echo $selected; ?> value="<?php echo $page->ID ?>"> <?php echo $page->post_title; ?></option>
-      <?php
+<option <?php echo $selected; ?> value="<?php echo $page->ID ?>"> <?php echo $page->post_title; ?></option>
+<?php
     }
     echo '</select>';
   }
@@ -535,7 +535,3 @@ class velesh_init_theme{
 global $theme_init;
 /* init theme*/
 $theme_init = new velesh_init_theme();
-
-
-
-
