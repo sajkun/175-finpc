@@ -5300,6 +5300,7 @@ html {
 .we-do {
   position: relative;
   z-index: 10;
+  overflow: hidden;
   background-repeat: no-repeat;
   background-position: 100% 50%;
   background-size: 40vw auto;
@@ -5355,7 +5356,7 @@ html {
   letter-spacing: 0.28px;
   text-decoration: none;
   text-transform: uppercase;
-  transition: all .1s;
+  transition: all 0.1s;
   position: relative;
   z-index: 100;
 }
@@ -5510,7 +5511,7 @@ html {
   max-width: 420px;
   text-align: center;
   display: inline-block;
-  transition: all .2s;
+  transition: all 0.2s;
 }
 
 .contact-url:hover {
@@ -6496,6 +6497,9 @@ html {
 .carousel-testi__image img {
   position: relative;
   z-index: 1;
+  width: initial !important;
+  max-width: 100%;
+  aspect-ratio: 1.5 / 1;
 }
 
 .carousel-testi__content {
