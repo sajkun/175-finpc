@@ -538,6 +538,7 @@ Vue.component('gallery-item', {
 	methods: {
 		show_gallery: function () {
 			jQuery.fancybox.open(strip(this.info.items), {
+				// beforeShow: function (el) {},
 				helpers: {
 					thumbs: {
 						width: 75,
