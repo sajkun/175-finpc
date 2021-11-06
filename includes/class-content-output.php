@@ -687,6 +687,8 @@ class theme_content_output{
      $items3 = get_field('block_items_3', $obj_id)?: array();
      $length = ceil(count($items3)/2);
      $items3 = array_chunk( $items3 ,$length);
+	  
+	  $block_items_3 = array_chunk($items3, ceil(count($items3) / 2));
 
     $args = array(
       'bg'    => $bg ,

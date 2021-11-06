@@ -15,6 +15,7 @@
     <div class="row">
       <div class="col-12" <?php echo 'style="z-index: 20"'; ?>>
         <div class="page-title">
+           <a id="<?php echo str_replace(' ', '-' , trim($block_1_title)) ?>" class="visuallyhidden"></a>
           <div class="page-title__bg-text"><?php echo $block_1_title_bg ?></div>
           <h2 class="page-title__text"><?php echo $block_1_title ?></h2>
         </div>
@@ -52,6 +53,7 @@
       <div class="col-md-6 valign-center-md">
         <div class="border-title">
           <div class="border-title__content">
+            <a id="<?php echo str_replace(' ', '-' , trim($block_2_title)) ?>" class="visuallyhidden"></a>
             <div class="border-title__bg-text"><?php echo $block_2_title_bg ?></div>
             <h2 class="border-title__text"><?php echo $block_2_title ?></h2>
           </div>
@@ -81,12 +83,14 @@
       <div class="col-12">
         <div class="border-title">
           <div class="border-title__content">
+          <a id="<?php echo str_replace(' ', '-' , trim($block_title_3)) ?>" class="visuallyhidden"></a>
             <div class="border-title__bg-text"><?php echo $block_title_bg_3 ?></div>
-            <h2 class="border-title__text"><?php echo $block_2_title ?></h2>
+            <h2 class="border-title__text"><?php echo $block_title_3 ?></h2>
           </div>
         </div>
         <div class="spacer-h-30"></div>
       </div>
+
       <div class="col-12 col-md-6 col-lg-5 offset-lg-1">
         <?php foreach ($block_items_3[0] as $key => $item): ?>
         <div class="carousel-item">
@@ -114,14 +118,14 @@
 <div class="spacer-h-30 spacer-h-100"></div>
 <?php endif ?>
 
-<?php if ($show_block_3): ?>
+<?php if ($show_block_4): ?>
 <section class="mission">
   <div class="container container-fixed">
     <div class="row">
       <div class="col-12 offset-md-1 col-md-10">
         <p class="shift-text">
-
-        Our clients trust us—and our in-depth experience, to provide them with deep forward- looking insights that can help them strategically plan and makedecisions with confidence.
+        <a id="Insuarance" class="visuallyhidden"></a>
+       <?php echo $block_text_4; ?>
         </p>
       </div>
       <div class="col-md-6 image-holder">
@@ -149,7 +153,7 @@
 <div class="spacer-h-30 spacer-h-100"></div>
 <?php endif ?>
 
-
+<a id="Realestate" class="visuallyhidden"></a>
 <section class="contact-section">
 <div class="container container-fixed">
   <div class="spacer-h-50"></div>
