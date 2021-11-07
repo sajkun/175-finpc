@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 </div>
   <div class="spacer-h-50"></div>
 
-  <div class="gallery" id="gallery">
+  <div class="gallery" id="gallery-spotlight">
     <div class="row">
       <div class="col-md-9">
         <ul class="gallery__categories">
@@ -39,21 +39,10 @@ if ( ! defined( 'ABSPATH' ) ) {
         <div class="spacer-h-20"></div>
       </div><!-- col-md-9 -->
       <div class="col-md-3 text-right-md">
-        <div class="gallery__sort">
-          <span class="gallery__sort-label">Sort by:</span>
-          <select name="" id="" ref="sort_select" v-on:change="do_sort">
-            <option value="The Newest">The Newest</option>
-            <option value="The Oldest">The Oldest</option>
-          </select>
-        </div><!-- gallery__sort -->
-        <div class="spacer-h-20"></div>
       </div><!-- col-md-3 -->
     </div><!-- row -->
-
-    <div class="spacer-h-30 spacer-h-lg-60"></div>
-
     <transition-group
-      class="gallery-content"
+      class="gallery-content-spotlight"
       name="gallery-content"
       tag="div"
       v-bind:css="false"
@@ -63,20 +52,10 @@ if ( ! defined( 'ABSPATH' ) ) {
       v-on:after-enter="enterAfter"
       v-on:after-leave="leaveAfter"
     >
-      <gallery-item
-        v-for="info, key in _items"
-        :key = '"gallery_item_"+key'
-        :_info = 'info'
-      ></gallery-item>
-
-      <div :key="'blank'" class="gallery-item blank">
-      </div>
+        <img :src="item.href" :key="'image'+key" v-for="item, key in _gallery_items" v-on:click="show_gallery(item)" alt="">
     </transition-group>
 
-    <div class="spacer-h-30" v-if="show_button"></div>
-    <div class="gallery-content" v-if="show_button">
-      <div class="gallery-item"><a href="#" class="button gallery-load-more" v-on:click.prevent="show_more">load more</a></div><div class="gallery-item"></div><div class="gallery-item"></div>
-    </div>
+    <div class="spacer-h-30 spacer-h-lg-60"></div>
   </div><!-- gallery -->
 </div><!-- container-lg -->
 <div class="spacer-h-30 spacer-h-lg-110"></div>

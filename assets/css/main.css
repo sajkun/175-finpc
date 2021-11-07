@@ -9768,7 +9768,7 @@ section.mission .our-mission {
 
 .gallery__categories li a {
   color: #000000;
-  transition: all .1s;
+  transition: all 0.1s;
 }
 
 .gallery__categories li a:hover {
@@ -9855,7 +9855,7 @@ section.mission .our-mission {
 .gallery-item__image img {
   width: 100%;
   height: auto;
-  transition: all .3s;
+  transition: all 0.3s;
 }
 
 .gallery-item__image:hover img {
@@ -9877,6 +9877,21 @@ section.mission .our-mission {
 .gallery-load-more {
   width: 100%;
   max-width: 303px;
+}
+
+.gallery-content-spotlight {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+}
+
+.gallery-content-spotlight img {
+  width: 100%;
+  height: auto;
+  height: 100%;
+  cursor: pointer;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
 .requirements-description {

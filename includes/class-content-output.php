@@ -532,15 +532,20 @@ class theme_content_output{
     }, $galleries);
 
 
-    wp_localize_script($theme_init->main_script_slug,'gallery_items', $galleries);
+    wp_localize_script($theme_init->main_script_slug, 'gallery_items', $galleries);
 
     $args = array(
       'obj' => $obj,
       'all' => get_permalink($gallery),
       'theme_galleries_tax' => $theme_galleries_tax,
+      'galleries' => $galleries,
     );
 
-    print_theme_template_part('gallery', 'pages', $args);
+    if($obj->slug === 'spotlight'){
+        print_theme_template_part('gallery-spotlight', 'pages', $args);
+    }else{
+        print_theme_template_part('gallery', 'pages', $args);
+    }
   }
 
 
@@ -621,7 +626,6 @@ class theme_content_output{
 
     print_theme_template_part('watch', 'pages', $args);
   }
-
 
   public static function print_watch_single_page(){
     if(!function_exists('get_field')){
@@ -724,7 +728,6 @@ class theme_content_output{
     print_theme_template_part('service-single', 'pages', $args);
   }
 
-
   public static function print_contacts_page(){
     $obj_id = get_queried_object_id();
 
@@ -747,7 +750,6 @@ class theme_content_output{
     );
     print_theme_template_part('contacts', 'pages', $args);
   }
-
 
   public static function print_community_page(){
     if(!function_exists('get_field')){
@@ -850,8 +852,6 @@ class theme_content_output{
         'date'  => $date->format('d M Y'),
       );
     }, $video);
-
-   clog($videos);
 
     $args = array(
       'bg'   => wp_get_attachment_image_url($img_id, 'full'),

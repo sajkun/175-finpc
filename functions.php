@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 class velesh_init_theme{
 
   /* main style location  */
-  public $main_style = '/assets/css/main.min7.css';
+  public $main_style = '/assets/css/main.min8.css';
 
   /*theme style file slug*/
   public $main_style_slug = 'theme-main-style-dev1';
@@ -29,7 +29,7 @@ class velesh_init_theme{
   public $font = '/assets/fonts/font.css';
 
   /* main script location  */
-  public $main_script= '/assets/script/main.min4.js';
+  public $main_script= '/assets/script/main.min5.js';
 
   /* main script slug */
   public $main_script_slug = 'theme-main-script-dev1';
